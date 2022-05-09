@@ -1,12 +1,21 @@
 ---
-title: "Project proposal"
-author: "Team name"
+title: "Facets of Wealth Inequality Visualized"
+author: "Superb Bilby"
 output: github_document
 ---
 
 ```{r load-packages, message = FALSE}
 library(tidyverse)
 ```
+
+## Goal of this Project
+Our high level goal is to create an easily digestible website which conveys the true scale of global wealth and income inequality.  
+
+## Motivation and Questions
+
+Global wealth and income inequality is at an all time high, however, the magnitude of this inequality is difficult to fathom. Often, the uber wealthy of society are worshiped for their resilience and innovation, when in reality they should be scorned for their greed and malice. A resource that helps people more easily digest the extreme wealth disparity may shift people away from the deification of the world's oligarchs, and shift people toward the rally against such rapacious behavior. We aim to answer the following questions in an attempt to clarify the realities of wealth/income inequality: 
+
+What can the wealth of a billionaire accomplish? How many of our world's poorest would it take to match the wealth of our world's richest? What are some ways we can begin to conceptualize how much money the wealthiest humans actually have? Does anybody really need so much wealth? 
 
 ## Dataset
 

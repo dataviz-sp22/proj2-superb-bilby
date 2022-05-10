@@ -4,8 +4,11 @@ author: "Superb Bilby"
 output: github_document
 ---
 
-```{r load-packages, message = FALSE}
+```{r load-packages, message = FALSE, warning = FALSE, echo = FALSE}
 library(tidyverse)
+library(knitr)
+bil <- read.csv("../data/billionaire/Forbes Annual Report Data - 2020.csv", skip = 1) %>% drop_na()
+mob <- read.csv("../data/wealth-mobility/2-wealth-structure.csv")
 ```
 
 ## Goal of this Project
@@ -17,11 +20,58 @@ Global wealth and income inequality is at an all time high, however, the magnitu
 
 What can the wealth of a billionaire accomplish? How many of our world's poorest would it take to match the wealth of our world's richest? What are some ways we can begin to conceptualize how much money the wealthiest humans actually have? Does anybody really need so much wealth? 
 
-## Dataset
+To answer these questions through visualization, we will be relying on the following datasets:  
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+1) [The Forbes Billionaire's List](https://docs.google.com/spreadsheets/d/1JThOdF95e0NYoea5pCWd5UDXLmIGc1Fwj1aajDSYYhk/edit#gid=685599441). The dataset provides information about billionaire's networths, how old they are, what industry they are in, their gender, and their location.  
 
-Make sure to load the data and use inline code for some of this information.
+```{r, echo = FALSE}
+kable(head(bil))
+```
+
+2) [The Wealth Mobility Dataset](https://github.com/fpfeffer/WealthMobility/blob/master/Data/2-wealth-structure.csv). The dataset breaks down how wealth is divided up by quintiles, quartiles, and race. It also provides intra-quartile and quintile breakdowns, such as information about the wealthiest quintile within the poorest quintile.
+
+```{r, echo = FALSE}
+kable(head(mob))
+```
+
+## Weekly Plan of Attack
+
+Below is the delineation of our plan to get our project complete on time.
+
+<span style="color:red; font-weight: bold"> Micah Corning-Myers' Tasks </span> <br>
+<span style="color:blue; font-weight: bold"> Jinfei Zhu's Tasks </span> <br>
+<span style="color:purple; font-weight: bold"> Both Team Member's Tasks </span> <br>
+
+#### Week 0: Brainstorming & Proposals  
+
+<ol>
+  <li style="color:purple; font-weight: bold"> Offer up at least 1 preliminary idea for a project </li>
+  <li style="color:purple; font-weight: bold"> Collect at least one dataset for the project </li>
+  <li style="color:blue; font-weight: bold"> Add the datasets to the repo and fork the project 1 template </li>
+  <li style="color:red; font-weight: bold"> Edit the template accordingly for project 2 and write up the proposal </li>
+  <li style="color:blue; font-weight: bold"> Make substantive edits and make proposal presentation worthy </li>
+</ol>
+
+#### Week 1: Reviews and Visualizations  
+
+<ol>
+  <li style="color:purple; font-weight: bold"> Write peer feedbacks and identify/incorporate relevant peer feedback </li>
+  <li style="color:purple; font-weight: bold"> Data Cleaning & Tidying </li>
+  <li style="color:red; font-weight: bold"> Complete animated time series visualization </li>
+  <li style="color:blue; font-weight: bold"> Complete Chloropleth Visualization </li>
+  <li style="color:red; font-weight: bold"> Complete Quintiles Static Visualization </li>
+  <li style="color:blue; font-weight: bold"> Complete Interactive Visualization (user selects parameter) </li>
+</ol>
+
+#### Week 2: Shiny, Write Up, Build Presentation  
+<ol>
+  <li style="color:red; font-weight: bold"> Deploy Shiny App </li>
+  <li style="color:blue; font-weight: bold"> Organize presentation relying on Shiny App  </li>
+  <li style="color:purple; font-weight: bold"> Complete write up </li>
+  <li style="color:purple; font-weight: bold"> Practice presentation, give mutual feedback, bug hunt </li>
+</ol>
+
+
 
 ## Questions
 

@@ -38,37 +38,37 @@ kable(head(mob))
 
 Below is the delineation of our plan to get our project complete on time.
 
-<span style="color:red; font-weight: bold"> Micah Corning-Myers' Tasks </span> <br>
-<span style="color:blue; font-weight: bold"> Jinfei Zhu's Tasks </span> <br>
-<span style="color:purple; font-weight: bold"> Both Team Member's Tasks </span> <br>
+<span style="color:red; font-weight: bold"> Micah Corning-Myers' Tasks: 💃</span> <br>
+<span style="color:blue; font-weight: bold"> Jinfei Zhu's Tasks: 🕺 </span> <br>
+<span style="color:purple; font-weight: bold"> Both Team Member's Tasks: 👯</span> <br>
 
 #### Week 0: Brainstorming & Proposals  
 
 <ol>
-  <li style="color:purple; font-weight: bold"> Offer up at least 1 preliminary idea for a project </li>
-  <li style="color:purple; font-weight: bold"> Collect at least one dataset for the project </li>
-  <li style="color:blue; font-weight: bold"> Add the datasets to the repo and fork the project 1 template </li>
-  <li style="color:red; font-weight: bold"> Edit the template accordingly for project 2 and write up the proposal </li>
-  <li style="color:blue; font-weight: bold"> Make substantive edits and make proposal presentation worthy </li>
+  <li style="color:purple; font-weight: bold"> 👯 Offer up at least 1 preliminary idea for a project </li>
+  <li style="color:purple; font-weight: bold">👯 Collect at least one dataset for the project </li>
+  <li style="color:blue; font-weight: bold"> 🕺 Add the datasets to the repo and fork the project 1 template </li>
+  <li style="color:red; font-weight: bold"> 💃 Edit the template accordingly for project 2 and write up the proposal </li>
+  <li style="color:blue; font-weight: bold"> 🕺 Make substantive edits and make proposal presentation worthy </li>
 </ol>
 
 #### Week 1: Reviews and Visualizations  
 
 <ol>
-  <li style="color:purple; font-weight: bold"> Write peer feedbacks and identify/incorporate relevant peer feedback </li>
-  <li style="color:purple; font-weight: bold"> Data Cleaning & Tidying </li>
-  <li style="color:red; font-weight: bold"> Complete animated time series visualization </li>
-  <li style="color:blue; font-weight: bold"> Complete Chloropleth Visualization </li>
-  <li style="color:red; font-weight: bold"> Complete Quintiles Static Visualization </li>
-  <li style="color:blue; font-weight: bold"> Complete Interactive Visualization (user selects parameter) </li>
+  <li style="color:purple; font-weight: bold">👯 Write peer feedbacks and identify/incorporate relevant peer feedback </li>
+  <li style="color:purple; font-weight: bold">👯 Data Cleaning & Tidying </li>
+  <li style="color:red; font-weight: bold"> 💃 Complete animated time series visualization </li>
+  <li style="color:blue; font-weight: bold"> 🕺 Complete Chloropleth Visualization </li>
+  <li style="color:red; font-weight: bold"> 💃 Complete Quintiles Static Visualization </li>
+  <li style="color:blue; font-weight: bold"> 🕺 Complete Interactive Visualization (user selects parameter) </li>
 </ol>
 
 #### Week 2: Shiny, Write Up, Build Presentation  
 <ol>
-  <li style="color:red; font-weight: bold"> Deploy Shiny App </li>
-  <li style="color:blue; font-weight: bold"> Organize presentation relying on Shiny App  </li>
-  <li style="color:purple; font-weight: bold"> Complete write up </li>
-  <li style="color:purple; font-weight: bold"> Practice presentation, give mutual feedback, bug hunt </li>
+  <li style="color:red; font-weight: bold"> 💃 Deploy Shiny App </li>
+  <li style="color:blue; font-weight: bold"> 🕺 Organize presentation relying on Shiny App  </li>
+  <li style="color:purple; font-weight: bold">👯 Complete write up </li>
+  <li style="color:purple; font-weight: bold">👯 Practice presentation, give mutual feedback, bug hunt </li>
 </ol>
 
 

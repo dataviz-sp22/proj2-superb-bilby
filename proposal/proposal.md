@@ -21,20 +21,49 @@ clarify the realities of wealth/income inequality, and deploy our
 answers to a [Shiny](https://shiny.rstudio.com/) application for wider
 accessibility:
 
-What can the wealth of a billionaire accomplish? How many of our world’s
-poorest would it take to match the wealth of our world’s richest? What
-are some ways we can begin to conceptualize how much money the
-wealthiest humans actually have? Does anybody really need so much
-wealth?
+### 1) Wealth Inequality
+
+-   What can the wealth of a billionaire accomplish?
+-   How many of our world’s poorest would it take to match the wealth of
+    our world’s richest?
+-   What are some ways we can begin to conceptualize how much money the
+    wealthiest humans actually have?
+-   Does anybody really need so much wealth?
+-   What is the Industry/Geolocation distribution of billionaires
+
+### 2) Wealth Mobility
+
+-   Dividing income levels to 5 quantiles (0%-20%, 20%-40%, 40%-60,
+    60%-80%, 80%-100%), can we visualize their mobility patterns in an
+    interactive dashboard.
+
+## Data
 
 To answer these questions through visualization, we will be relying on
 the following datasets:
 
-1)  [The Forbes Billionaire’s
-    List](https://docs.google.com/spreadsheets/d/1JThOdF95e0NYoea5pCWd5UDXLmIGc1Fwj1aajDSYYhk/edit#gid=685599441).
-    The dataset provides information about billionaire’s networths, how
-    old they are, what industry they are in, their gender, and their
-    location.
+### 1) Billionaire List
+
+[The Forbes Billionaire’s
+List](https://docs.google.com/spreadsheets/d/1JThOdF95e0NYoea5pCWd5UDXLmIGc1Fwj1aajDSYYhk/edit#gid=685599441).
+The dataset provides information about billionaire’s networths, how old
+they are, what industry they are in, their gender, and their location.
+
+**Codebook**
+
+| variable        | class     | description                                          |
+|:----------------|:----------|:-----------------------------------------------------|
+| Name.and.Rank   | character | Full name                                            |
+| Wealth..Million | character | Wealth in million                                    |
+| Surname         | character | Surname                                              |
+| World.Rank      | integer   | World rank according to wealth                       |
+| Age             | integer   | Age                                                  |
+| Wealth.Source   | character | Company name or                                      |
+| Industry        | character | Industry of the wealth source                        |
+| Gender          | character | Gender of the billionaire                            |
+| State           | character | If this billionaire is from US, their hometown state |
+
+**Data**
 
 | Name.and.Rank   | Wealth..Millions. | Surname    | World.Rank | Age | Wealth.Source      | Industry              | Gender | State      |
 |:----------------|:------------------|:-----------|-----------:|----:|:-------------------|:----------------------|:-------|:-----------|
@@ -45,12 +74,27 @@ the following datasets:
 | Mark Zuckerberg | $54,700           | Zuckerberg |          7 |  35 | Facebook           | Technology            | M      | California |
 | Jim Walton      | $54,600           | Walton     |          8 |  71 | Walmart            | Fashion & Retail      | M      | Arkansas   |
 
-2)  [The Wealth Mobility
-    Dataset](https://github.com/fpfeffer/WealthMobility/blob/master/Data/2-wealth-structure.csv).
-    The dataset breaks down how wealth is divided up by quintiles,
-    quartiles, and race. It also provides intra-quartile and quintile
-    breakdowns, such as information about the wealthiest quintile within
-    the poorest quintile.
+### 2) Wealth Mobility Dataset
+
+[The Wealth Mobility
+Dataset](https://github.com/fpfeffer/WealthMobility/blob/master/Data/2-wealth-structure.csv).
+The dataset breaks down how wealth is divided up by their original and
+destined quintiles and race. It also provides intra-quartile and
+quintile breakdowns, such as information about the wealthiest quintile
+within the poorest quintile.
+
+**Codebook**
+
+| variable | class     | description                   |
+|:---------|:----------|:------------------------------|
+| white    | character | No if Black, Yes if No        |
+| o        | character | Original quintile             |
+| d        | character | Destined quintile             |
+| w        | dummy     | 0 if this Black, 1 if White   |
+| o        | integer   | Original quintile from 1 to 5 |
+| d        | integer   | Destined quintile from 1 to 5 |
+
+**Data**
 
 | white | o               | d                |   w | origin | destination |        n |
 |:------|:----------------|:-----------------|----:|-------:|------------:|---------:|
@@ -71,7 +115,9 @@ time.
 Tasks: 🕺 </span> <br> <span style="color:purple; font-weight: bold">
 Both Team Member’s Tasks: 👯</span> <br>
 
-#### Week 0: Brainstorming & Proposals
+#### Week 0: Brainstorming & Proposals (May 9 - May 15)
+
+Proposal: Due Wed, May 11 Peer review: Due Fri, May 13
 
 <ol>
 <li style="color:purple; font-weight: bold">
@@ -91,7 +137,9 @@ Both Team Member’s Tasks: 👯</span> <br>
 </li>
 </ol>
 
-#### Week 1: Reviews and Visualizations
+#### Week 1: Reviews and Visualizations (May 16 - May 22)
+
+Revised Proposal: Due Wed, May 18
 
 <ol>
 <li style="color:purple; font-weight: bold">
@@ -114,7 +162,9 @@ Both Team Member’s Tasks: 👯</span> <br>
 </li>
 </ol>
 
-#### Week 2: Shiny, Write Up, Build Presentation
+#### Week 2: Shiny, Write Up, Build Presentation (May 23 - May 29)
+
+Project Draft for peer review: Due Wed, May 25
 
 <ol>
 <li style="color:red; font-weight: bold">
@@ -131,12 +181,22 @@ Both Team Member’s Tasks: 👯</span> <br>
 </li>
 </ol>
 
-## Questions
+## Visualization plan
 
-The two questions you want to answer.
+### 1) Wealth Inequality
 
-## Analysis plan
+-   How wealthy is each billionaire
+    -   Visualize 1 million with a rice/house (or any emoji), and
+        visualize each billionaire’s wealth is equal to how many
+        rices/houses/other emojis
+    -   Visualize how long it will take an average-income person to
+        become billionaire, from top 10 according to GDP produced per
+        capita.
+-   See billionaire’s distribution interactive dashboard
+    -   Bar Plot of Industries of billionaire
+    -   Chloropleth of billionaires from US
 
-A plan for answering each of the questions including the variables
-involved, variables to be created (if any), external data to be merged
-in (if any).
+### 2) Economic Mobility
+
+-   Quintiles Static Visualization with dropdown bar to choose each
+    quintile in an interactive dashboard.

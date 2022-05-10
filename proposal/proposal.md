@@ -17,7 +17,9 @@ resource that helps people more easily digest the extreme wealth
 disparity may shift people away from the deification of the world’s
 oligarchs, and shift people toward the rally against such rapacious
 behavior. We aim to answer the following questions in an attempt to
-clarify the realities of wealth/income inequality:
+clarify the realities of wealth/income inequality, and deploy our
+answers to a [Shiny](https://shiny.rstudio.com/) application for wider
+accessibility:
 
 What can the wealth of a billionaire accomplish? How many of our world’s
 poorest would it take to match the wealth of our world’s richest? What

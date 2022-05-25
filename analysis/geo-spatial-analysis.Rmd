@@ -1,0 +1,10 @@
+---
+title: "GeoSpatial Analysis of Wealth Inequality Visualized"
+author: "Superb Bilby"
+output: github_document
+---
+
+```{r}
+
+```
+

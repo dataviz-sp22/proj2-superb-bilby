@@ -4,7 +4,89 @@ author: "Superb Bilby"
 output: github_document
 ---
 
-```{r}
+```{r load-packages}
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(colorspace)
+library(urbnmapr)
 
+# set default theme for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
+```
+## Geospatial Distribution
+```{r read-data}
+bil <- read.csv("../data/billionaire/Forbes Annual Report Data - 2020.csv", skip = 1) %>% drop_na()
+mob <- read.csv("../data/wealth-mobility/2-wealth-structure.csv")
+states_sf <- get_urbn_map("states", sf = TRUE)
+head(bil)
+```
+
+Note: The Choropleth draws very slowly. I decide to draw 
+```{r data-wrangling}
+# read spatial geometry from urbnmapr package
+
+states_sf <- states() %>%
+  shift_geometry()
+
+# group by and count billionaire
+bil_by_state <- bil %>%
+  select(State)%>%
+  filter(State %in% us_states)%>%
+  group_by(State) %>%
+  summarise(n = n())
+bil_by_state
+
+# combine data to 
+bil_combined <- states_sf %>%
+  filter(NAME %in% state.name) %>%
+  left_join(bil_by_state, by = c("NAME" = "State")) %>%
+  mutate(rate_cut = cut_number(n, n = 4)) 
+bil_combined
+
+# Find the states without Billionnaire
+states_no_bil <- bil_combined$NAME[is.na(bil_combined$rate_cut)]
+states_no_bil
+```
+
+"New Hampshire", "Vermont", "Delaware", "New Mexico", "Alabama", "North Dakota", "Alaska" are the seven states without billionaires...
+
+```{r plot-choropleth}  
+bil_choropleth <- ggplot(data = bil_combined) +
+  geom_sf(mapping = aes(fill = rate_cut)) +
+  scale_fill_discrete_sequential(palette = "viridis",
+                                 rev = FALSE,
+                                 labels = c("[1,2]", "(2,5]", "(5,10]", "(10, 153]", 0)) +
+  # scale_fill_discrete_sequential(palette = "viridis",
+  #                               rev = FALSE) +
+  labs(
+    title = "Number of billionaires by state according to Forbes",
+    subtitle = "As of Year 2020", 
+    caption = "The Forbes Billionaire's List",
+    fill = NULL) +
+    ggthemes::theme_map()
+bil_choropleth
+```
+
+
+```{r save-plot}
+ggsave("choropleth.png")
+```
+
+
+## Industry Distribution
+```{r industry-eda}
+# TODO: Build a shiny app that choose industry and show top 10 billionaire table in that industry
+industry_choices <- bil %>%
+  distinct(Industry) %>%
+  arrange(Industry) %>%
+  pull(Industry)
+industry_choices
+```
+```{r industry plot}
+bil_by_industry <- bil %>%
+  group_by(industry)%>%
+  summarise(n = n(),
+            avg_wealth)
 ```
 

@@ -48,4 +48,17 @@ bil_poor %>%
   theme(legend.position = "none")
 ```
 
+```{r}
+# Quintile sources:
+wealth_quintiles <- read.csv("../data/fed/federal_reserve_quintiles.csv")
+colnames(wealth_quintiles)[1] = "Quintile"
 
+wealth_quintiles %>%
+  mutate(Quintile = paste0(Quintile, " - ", as.character(Overall), "%")) %>%
+  ggplot(aes(x="", y=Overall, fill=Quintile)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  theme_void() +
+  labs(title = "Percentage of Wealth Held by Each Quintile in the United States")
+
+```

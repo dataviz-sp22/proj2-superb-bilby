@@ -7,6 +7,7 @@ output: github_document
 ```{r load-packages, warning = FALSE, message=FALSE}
 library(tidyverse)
 library(readr)
+library(scales)
 
 # set default theme for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
@@ -25,15 +26,26 @@ bil_poor <- bil %>%
          bil = "1") %>%
   select(wealth, bil)
 
-bil_poor[nrow(bil_poor) + 1,] = c(3400000000000, "0")
-  
-bil_poor %>%
-  dplyr::group_by(bil) %>%
-  dplyr::summarise(total_wealth = sum(wealth))
+write.csv(bil_poor, "billionaires_simplified.csv", row.names = FALSE)
 
-%>%
-  ggplot(aes(x = bil, y = wealth, fill = bil)) +
-  geom_col()
+bil_poor <- read.csv("billionaires_simplified.csv") %>%
+  group_by(bil) %>%
+  summarise(total_wealth = sum(wealth)) %>%
+  ungroup() %>%
+  mutate(bil = ifelse(bil == 0, "50th Percentile", "Billionaires"))
+  
+# Poorest 50% wealth: https://www.bloomberg.com/news/articles/2021-12-17/wealth-share-rose-in-pandemic-for-poorest-50-and-top-1-of-u-s
+
+bil_poor %>%
+  ggplot(aes(x = bil, y = total_wealth / 1000000000000, fill = bil)) +
+  geom_col() +
+  labs(x = "Social Demographic Chunk", 
+       y = "Wealth, in Trillions of Dollars",
+       title = "167.7 Million Americans Wealth versus the 611 American Billionaires",
+       caption = "Source: Federal Reserve 2021") +
+  scale_fill_brewer(palette = "Accent") +
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
 

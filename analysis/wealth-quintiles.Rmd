@@ -1,0 +1,39 @@
+---
+title: "Wealth Quintiles"
+author: "Superb Bilby"
+output: github_document
+---
+
+```{r load-packages, warning = FALSE, message=FALSE}
+library(tidyverse)
+library(readr)
+
+# set default theme for ggplot2
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
+```
+
+
+```{r billionaire-wealth}
+bil <- read.csv("../data/billionaire/Forbes Annual Report Data - 2020.csv", skip = 1) %>% drop_na()
+mob <- read.csv("../data/wealth-mobility/2-wealth-structure.csv")
+```
+
+```{r}
+colnames(bil)[2] <- "wealth"
+bil_poor <- bil %>% 
+  mutate(wealth = parse_number(wealth) * 1000000,
+         bil = "1") %>%
+  select(wealth, bil)
+
+bil_poor[nrow(bil_poor) + 1,] = c(3400000000000, "0")
+  
+bil_poor %>%
+  dplyr::group_by(bil) %>%
+  dplyr::summarise(total_wealth = sum(wealth))
+
+%>%
+  ggplot(aes(x = bil, y = wealth, fill = bil)) +
+  geom_col()
+```
+
+

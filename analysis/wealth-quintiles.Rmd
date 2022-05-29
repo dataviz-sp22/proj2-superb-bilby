@@ -59,6 +59,10 @@ wealth_quintiles %>%
   geom_bar(stat="identity", width=1, color="white") +
   coord_polar("y", start=0) +
   theme_void() +
-  labs(title = "Percentage of Wealth Held by Each Quintile in the United States")
+  labs(title = "Percentage of Wealth Held by Each Quintile in the United States") +
+  scale_fill_brewer(palette = "Set2")
+
+```
+```{r}
 
 ```

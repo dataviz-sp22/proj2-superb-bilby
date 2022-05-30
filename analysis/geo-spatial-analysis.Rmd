@@ -205,7 +205,7 @@ df_longer <- df %>%
 #   geom_col()
 ```
 ```{r}
-data <- rbind(rep(max(value),6) , rep(0,6) , df)
+data <- rbind(rep(max(value),7) , rep(0,7) , df)
 data
 # Custom the radarChart !
 radarchart(data, axistype=1 , 
@@ -217,10 +217,16 @@ radarchart(data, axistype=1 ,
     cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,max(money_left),round(max(value)/5, digits = -4)), cglwd=0.8,
  
     #custom labels
-    vlcex=0.8 
+    vlcex=1.5 
     )
 ```
 
+```{r name-choices}
+name_choices <- bil %>%
+  distinct(Name.and.Rank) %>%
+  arrange(Name.and.Rank) %>%
+  pull(Name.and.Rank)
+```
 
 
 

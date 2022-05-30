@@ -23,7 +23,7 @@ uchicago_master <- 0.16
 trip_hawaii <- 0.004
 aston_martin <- 0.3
 house_in_beverly_hill <- 3
-name_school <- 300 # Name UChicago booth
+name_school <- 300 # Name UChicago Booth
 
 # Create a list for all spending items
 spending <- c("Household Spending",
@@ -89,12 +89,17 @@ ui <- navbarPage(
                           br(),
                           # tableOutput("test_table")
                           # textOutput("test")
-                          plotOutput("radar_plot")
-                          )
+                          plotOutput("radar_plot"),
+                          htmlOutput("info_text")
+                          ),
+                 tabPanel("Spending Data",
+                          br(),
+                          tableOutput("spending_data"))
                           )
                       )
                 ) #sidebarLayout
-           )#tabPanel
+           ) #tabPanel
+    
   )#navbarPage
   
 
@@ -103,7 +108,7 @@ ui <- navbarPage(
 # Define server function -------------------------------------------------------
 
 server <- function(input, output) {
-  output$test_table <- renderTable(spending_data())
+  output$spending_data <- renderTable(spending_data())
   # output$test <- renderText(max_value())
   
   wealth <- reactive(
@@ -116,21 +121,21 @@ server <- function(input, output) {
   )
 
       
-  # total price
+  # Calculate total price of each item and money left
   total_household <- reactive({us_household_income * input$num_us_household})
   total_master <- reactive({uchicago_master * input$num_uchicago_master})
   total_trip <- reactive({trip_hawaii * input$num_trip_to_hawaii})
   total_car <- reactive({aston_martin * input$num_aston_martin})
   total_house <- reactive({house_in_beverly_hill * input$num_house_in_beverly_hill})
   total_fame <- reactive({name_school * input$num_name_school})
-
   money_left <- reactive(wealth() - sum(total_household(),
                              total_master(),
                              total_trip(),
                              total_car(),
                              total_house(),
                              total_fame()))
-
+  
+  # Calculate maximum number of house hold
   max_value <- reactive({max(total_household(),
              total_master(),
              total_trip(),
@@ -146,7 +151,8 @@ server <- function(input, output) {
                    "Housing" = total_house(),
                    "Fame" = total_fame(),
                    "Left Money" = money_left())})
-  # 
+  
+  # Define the boundary of Radar Plot
   spending_data <- reactive({rbind(rep(max_value(),7) , rep(0,7) , new_row())})
   
   output$radar_plot <- renderPlot({
@@ -168,21 +174,19 @@ server <- function(input, output) {
                cglwd=0.8,
                
                #custom labels
-               vlcex=0.8 
+               vlcex=1.5 
     )
   }
   )
+  
+  output$info_text <- renderText({
+    ifelse(money_left() < 0,
+           "<font color=\"#48A096\"><h2>Success! You went bankruptcy!</h2></font>",
+           "<font color=\"#48A096\"><h2>You need to spend more!</h2></font>")
+    
+  })
       
 }
-
-
-
-
-
-
-
-
-
 
 
 # Create the Shiny app object --------------------------------------------------

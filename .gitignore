@@ -38,3 +38,5 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 .DS_Store
+analysis/bil-wealth-app/backup.R
+analysis/test_app/app.R

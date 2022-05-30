@@ -17,7 +17,6 @@ ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
 ```
 ## Geospatial Distribution
 ```{r read-data}
-# Don't drop_na() for bil data -> na value for state denotes international billionaire
 bil <- read.csv("../data/billionaire/Forbes Annual Report Data - 2020.csv", skip = 1) %>% drop_na()
 mob <- read.csv("../data/wealth-mobility/2-wealth-structure.csv")
 # parse wealth into number
@@ -75,7 +74,6 @@ bil_choropleth
 ggsave("choropleth.png")
 ```
 
-## TODO SCCATTER PLOT BY POPULATION OF EACH STATE, MEDIAN INCOME IN EACH STATE
 ## Industry Distribution
 ```{r industry-eda}
 # TODO: Build a shiny app that choose industry and show top 10 billionaire table in that industry
@@ -104,13 +102,23 @@ num_by_industry_plot
 ```
 ## Top n billionarie per industry
 ```{r top-n-billionaire-per-industry}
-input_industry <- "Technology"
-# input_industry <- "Telecom"
+# input_industry <- "Technology"
+input_industry <- "Telecom"
 
-bil %>%
+top_5_data <- bil %>%
   filter(Industry == input_industry) %>%
-  arrange(World.Rank) %>%
-  top_n(n = 5)
+  arrange(desc(Wealth..Millions.))%>%
+  head(5)
+top_5_data
+
+top_5_plot <- top_5_data%>%
+  ggplot(aes(x=Wealth..Millions., y=fct_reorder(Name.and.Rank, Wealth..Millions.))) +
+  geom_col() +
+  labs(title = paste("Top 5 Billionaire in", input_industry),
+       x = "Wealth in Million",
+       y = "Name") +
+  scale_x_continuous(labels=scales::dollar_format())
+top_5_plot
 ```
 
 
@@ -220,3 +228,4 @@ radarchart(data, axistype=1 ,
 
 Price of Choice:
 - Radar Chart: https://r-graph-gallery.com/142-basic-radar-chart.html
+- Shiny - Nultiple Numerical value: https://community.rstudio.com/t/creating-multiple-numeric-input-according-to-the-variables-of-an-uploaded-dataset/12293

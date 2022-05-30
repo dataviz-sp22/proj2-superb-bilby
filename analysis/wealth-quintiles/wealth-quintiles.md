@@ -1,10 +1,8 @@
----
-title: "Wealth Quintiles"
-author: "Superb Bilby"
-output: github_document
----
+Wealth Quintiles
+================
+Superb Bilby
 
-```{r load-packages, warning = FALSE, message=FALSE}
+``` r
 library(tidyverse)
 library(readr)
 library(scales)
@@ -13,13 +11,12 @@ library(scales)
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
 ```
 
-
-```{r billionaire-wealth}
+``` r
 bil <- read.csv("../../data/billionaire/Forbes Annual Report Data - 2020.csv", skip = 1) %>% drop_na()
 mob <- read.csv("../../data/wealth-mobility/2-wealth-structure.csv")
 ```
 
-```{r quintile-pie}
+``` r
 colnames(bil)[2] <- "wealth"
 bil_poor <- bil %>% 
   mutate(wealth = parse_number(wealth) * 1000000,
@@ -48,9 +45,9 @@ bil_poor %>%
   theme(legend.position = "none")
 ```
 
-```{r }
+![](wealth-quintiles_files/figure-gfm/quintile-pie-1.png)<!-- -->
 
-
+``` r
 # Incomplete
 
 # Quintile sources:
@@ -65,11 +62,17 @@ wealth_quintiles %>%
   theme_void() +
   labs(title = "Percentage of Wealth Held by Each Quintile in the United States") +
   scale_fill_brewer(palette = "Set2")
-
 ```
-```{r}
+
+![](wealth-quintiles_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+``` r
 wealth_quintiles %>%
   pivot_longer(cols = Debt:Financial, names_to = "Measure") %>%
   ggplot(aes(x = Quintile, y = value, fill = "Measure")) +
   geom_bar(posititon = "fill", stat = "identity")
 ```
+
+    ## Warning: Ignoring unknown parameters: posititon
+
+![](wealth-quintiles_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->

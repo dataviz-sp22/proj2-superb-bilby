@@ -29,7 +29,7 @@ spending <- c("Household Spending",
               "UChicago Master",
               "International Trip",
               "Aston Martin",
-              "House in Beverly Hill",
+              "House in Beverly Hills",
               "Name UChicago Booth",
               "Money Left")
 
@@ -74,7 +74,7 @@ ui <- navbarPage(
                             ),
                             fluidRow(
                               column(8, numericInput(inputId = "num_house_in_beverly_hill", 
-                                                     label = "House in Beverly Hill", 
+                                                     label = "House in Beverly Hills", 
                                                      value = 20)),
                               column(8, numericInput(inputId = "num_name_school", 
                                                      label = "Name UChicago Booth", 

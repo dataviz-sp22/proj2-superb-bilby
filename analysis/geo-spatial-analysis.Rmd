@@ -9,40 +9,42 @@ library(tidyverse)
 library(sf)
 library(rnaturalearth)
 library(colorspace)
-library(urbnmapr)
+library(tigris)
+library(fmsb)
 
 # set default theme for ggplot2
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 16))
 ```
 ## Geospatial Distribution
 ```{r read-data}
+# Don't drop_na() for bil data -> na value for state denotes international billionaire
 bil <- read.csv("../data/billionaire/Forbes Annual Report Data - 2020.csv", skip = 1) %>% drop_na()
 mob <- read.csv("../data/wealth-mobility/2-wealth-structure.csv")
-states_sf <- get_urbn_map("states", sf = TRUE)
+# parse wealth into number
+bil <- bil %>%
+  mutate(Wealth..Millions. = parse_number(Wealth..Millions.))
 head(bil)
 ```
-
-Note: The Choropleth draws very slowly. I decide to draw 
+Note: The Choropleth draws very slowly. I decide to draw a png first and put the plot into the shiny app instead of generate it in real time.
 ```{r data-wrangling}
-# read spatial geometry from urbnmapr package
-
+# read spatial geometry from tigris package
 states_sf <- states() %>%
   shift_geometry()
 
 # group by and count billionaire
 bil_by_state <- bil %>%
   select(State)%>%
-  filter(State %in% us_states)%>%
+  filter(State %in% state.name)%>%
   group_by(State) %>%
   summarise(n = n())
-bil_by_state
+head(bil_by_state)
 
 # combine data to 
 bil_combined <- states_sf %>%
   filter(NAME %in% state.name) %>%
   left_join(bil_by_state, by = c("NAME" = "State")) %>%
   mutate(rate_cut = cut_number(n, n = 4)) 
-bil_combined
+head(bil_combined)
 
 # Find the states without Billionnaire
 states_no_bil <- bil_combined$NAME[is.na(bil_combined$rate_cut)]
@@ -73,7 +75,7 @@ bil_choropleth
 ggsave("choropleth.png")
 ```
 
-
+## TODO SCCATTER PLOT BY POPULATION OF EACH STATE, MEDIAN INCOME IN EACH STATE
 ## Industry Distribution
 ```{r industry-eda}
 # TODO: Build a shiny app that choose industry and show top 10 billionaire table in that industry
@@ -85,8 +87,136 @@ industry_choices
 ```
 ```{r industry plot}
 bil_by_industry <- bil %>%
-  group_by(industry)%>%
+  group_by(Industry)%>%
   summarise(n = n(),
-            avg_wealth)
+            avg_wealth = mean(Wealth..Millions.))
+bil_by_industry
+num_by_industry_plot <- bil_by_industry %>%
+  arrange(desc(n))%>%
+  ggplot(mapping = aes(x = n, y = fct_reorder(Industry, n))) +
+  # geom_col(aes(fill = Industry), show.legend = FALSE) +
+  scale_fill_brewer(palette="BrBG")+
+  geom_col() +
+  labs(title = "Number of Billionaires by Industry",
+       x = "Number of Billionaires",
+       y = "Industry")
+num_by_industry_plot
+```
+## Top n billionarie per industry
+```{r top-n-billionaire-per-industry}
+input_industry <- "Technology"
+# input_industry <- "Telecom"
+
+bil %>%
+  filter(Industry == input_industry) %>%
+  arrange(World.Rank) %>%
+  top_n(n = 5)
 ```
 
+
+### How Rich They Are
+```{r interactive-app}
+# Choose a billionaire
+name <- "Jeff Bezos"
+wealth <- bil %>%
+  filter(Name.and.Rank == name)%>%
+  select(Wealth..Millions.) %>%
+  as.numeric()
+wealth
+
+# individual price (in million)
+us_household_income <- 0.065
+uchicago_master <- 0.16
+trip_hawaii <- 0.004
+aston_martin <- 0.3
+house_in_beverly_hill <- 3
+name_school <- 300 # Name Chicago booth
+
+
+# user input
+num_us_household <- 5000
+num_uchicago_master <- 1000
+num_trip_to_hawaii <- 1000
+num_aston_martin <- 1000
+num_house_in_beverly_hill <- 100
+num_name_school <- 100
+
+# total price
+total_household <- us_household_income * num_us_household
+total_master <- uchicago_master * num_uchicago_master
+total_trip <- trip_hawaii * num_trip_to_hawaii
+total_car <- aston_martin * num_aston_martin
+total_house <- house_in_beverly_hill * num_house_in_beverly_hill
+total_fame <- name_school * num_name_school
+
+money_left <- wealth - sum(total_household,
+                            total_master,
+                            total_trip,
+                            total_car,
+                            total_house,
+                            total_fame)
+spending <- c("Household Spending",
+              "UChicago Master",
+              "International Trip",
+              "Aston Martin",
+              "House in Beverly Hill",
+              "Name UChicago Booth",
+              "Money Left")
+
+value <- c(total_household,
+                total_master,
+                total_trip,
+                total_car,
+                total_house,
+                total_fame,
+                money_left)
+
+df <- data.frame("household" = total_household,
+                 "education" = total_master,
+                 "travel" = total_trip,
+                 "car" = total_car,
+                 "housing" = total_house,
+                 "fame" = total_fame,
+                 "money_left" = money_left)
+head(df)
+
+df_longer <- df %>%
+            pivot_longer(cols = c("household",
+                      "education",
+                      "travel",
+                      "car",
+                      "housing",
+                      "fame",
+                      "money_left"),
+                       names_to = "spending", 
+                       values_to = "value")
+
+
+# df_longer %>%
+#   ggplot(aes(y=spending, x=value)) +
+#   geom_col()
+```
+```{r}
+data <- rbind(rep(max(value),6) , rep(0,6) , df)
+data
+# Custom the radarChart !
+radarchart(data, axistype=1 , 
+ 
+    #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9) , pfcol=rgb(0.2,0.5,0.5,0.5) , plwd=4 , 
+ 
+    #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,max(money_left),round(max(value)/5, digits = -4)), cglwd=0.8,
+ 
+    #custom labels
+    vlcex=0.8 
+    )
+```
+
+
+
+
+## Reference
+
+Price of Choice:
+- Radar Chart: https://r-graph-gallery.com/142-basic-radar-chart.html

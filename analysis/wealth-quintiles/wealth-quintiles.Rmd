@@ -19,7 +19,7 @@ bil <- read.csv("../../data/billionaire/Forbes Annual Report Data - 2020.csv", s
 mob <- read.csv("../../data/wealth-mobility/2-wealth-structure.csv")
 ```
 
-```{r quintile-pie}
+```{r how-many-americans}
 colnames(bil)[2] <- "wealth"
 bil_poor <- bil %>% 
   mutate(wealth = parse_number(wealth) * 1000000,
@@ -48,7 +48,7 @@ bil_poor %>%
   theme(legend.position = "none")
 ```
 
-```{r }
+```{r quintile-pie}
 
 
 # Incomplete

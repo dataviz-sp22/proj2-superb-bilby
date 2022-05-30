@@ -45,7 +45,7 @@ bil_poor %>%
   theme(legend.position = "none")
 ```
 
-![](wealth-quintiles_files/figure-gfm/quintile-pie-1.png)<!-- -->
+![](wealth-quintiles_files/figure-gfm/how-many-americans-1.png)<!-- -->
 
 ``` r
 # Incomplete
@@ -64,7 +64,7 @@ wealth_quintiles %>%
   scale_fill_brewer(palette = "Set2")
 ```
 
-![](wealth-quintiles_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](wealth-quintiles_files/figure-gfm/quintile-pie-1.png)<!-- -->
 
 ``` r
 wealth_quintiles %>%
@@ -75,4 +75,4 @@ wealth_quintiles %>%
 
     ## Warning: Ignoring unknown parameters: posititon
 
-![](wealth-quintiles_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](wealth-quintiles_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->

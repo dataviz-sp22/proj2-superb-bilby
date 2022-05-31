@@ -75,15 +75,13 @@ ggsave("choropleth.png")
 ```
 
 ## Industry Distribution
-```{r industry-eda}
-# TODO: Build a shiny app that choose industry and show top 10 billionaire table in that industry
+
+```{r industry plot}
 industry_choices <- bil %>%
   distinct(Industry) %>%
   arrange(Industry) %>%
   pull(Industry)
-industry_choices
-```
-```{r industry plot}
+
 bil_by_industry <- bil %>%
   group_by(Industry) %>%
   summarise(n = n(),
@@ -94,16 +92,21 @@ num_by_industry_plot <- bil_by_industry %>%
   ggplot(mapping = aes(x = n, y = fct_reorder(Industry, n))) +
   # geom_col(aes(fill = Industry), show.legend = FALSE) +
   scale_fill_brewer(palette="BrBG")+
-  geom_col(fill = "purple", color = "black") +
+  geom_col(fill = "#93E9BE") +
   labs(title = "Number of Billionaires by Industry",
        x = "Number of Billionaires",
-       y = "Industry")
+       y = "Industry") +
+  theme(
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(), 
+    panel.grid.major.x = element_blank())
 num_by_industry_plot
 ```
 ## Top n billionarie per industry
 ```{r top-n-billionaire-per-industry}
-# input_industry <- "Technology"
-input_industry <- "Telecom"
+input_industry <- "Technology"
+# input_industry <- "Telecom"
 
 top_5_data <- bil %>%
   filter(Industry == input_industry) %>%

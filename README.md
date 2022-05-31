@@ -81,41 +81,72 @@ accessibility:
 
 ### Wealth Inequality
 
--   What can the wealth of a billionaire accomplish?
 -   How many of America’s poorest would it take to match the wealth of
     America’s richest (billionaires)?
 
-![how
-many](./analysis/wealth-quintiles/wealth-quintiles_files/figure-gfm/how-many-americans.png)
-While getting an exact count wasn’t possible, this highlights a rough
+**While getting an exact count wasn’t possible, this highlights a rough
 approximation that compares the two stark categories of American wealth:
 the richest and the poorest. In total, 167.7 million Americans wealth
 from the median and below have only about 17% more combined wealth than
-the combined wealth of the 611 richest.
+the combined wealth of the 611 richest.**
+
+![how
+many](./analysis/wealth-quintiles/wealth-quintiles_files/figure-gfm/how-many-americans.png)
+
+-   Who, or what, are these billionaires? What industry are they in and
+    where?
+
+**As we can see from the plots below, there are a large number of
+billionaires living in some of the most populous states. It seems that
+population and number of billionaires may have a somewhat rough but
+present linear association with population of the state. Additionally,
+we see that about half all billionaires are in three industries:
+Finance, technology, and food & beverage. Unsurprisingly, the “money”
+industry, i.e. Finance & Investments, is the biggest billionaire maker
+of all of the categories.**
+
+![who are
+billionaires](./analysis/geo-spatial-analysis_files/figure-gfm/industry%20plot-1.png)
+
+![Industry
+Billionaires](./analysis/geo-spatial-analysis_files/figure-gfm/plot-choropleth-1.png)
+
+-   What can the wealth of a billionaire accomplish? Does anybody really
+    need so much wealth?
+
+**To answer this question, we decided to build a reactive shiny
+application which allows users to input a quantity of highly expensive
+items to try and match the wealth of any of the billionaires on Forbe’s
+list. We include options such as the cost for a week long trip to Hawaii
+($4,000), the cost of a modest house in Hollywood ($3 million), and the
+cost of building (and naming) the UChicago Booth School of Business
+($300 million). The goal is to try to spend enough money to match the
+wealth of the selected billionaire. One will quickly find that it is
+extremely tedious just to spend the billionaire’s money if the click on
+the arrows to increment their various purchases. A central plot shows
+the user how they have spent their money thus far and how much money
+they have remaining.**
+
+![billionaire_app](./analysis/bil-wealth-app/example/app_example.png)
 
 -   If we look at the wealth of the population as opposed to just
     focusing on extremes, i.e. the wealth of billionaires versus
     America’s poorest, does wealth inequality still look that extreme?
 
-![how
-many](./analysis/wealth-quintiles/wealth-quintiles_files/figure-gfm/quintile-pie-1.png)
-
-By dividing United States wealth into 5 quantiles (0%-20%, 20%-40%,
+**By dividing United States wealth into 5 quantiles (0%-20%, 20%-40%,
 40%-60, 60%-80%, 80%-100%), we visualize the distribution of wealth more
 broadly across the entire population. Still, we find an extreme gap. The
 richest quintile has about 300 times the wealth of the poorest, and
 furthermore, the richest quintile has about 7 times more wealth than the
-other 80% of the population combined.
+other 80% of the population combined.**
 
--   What are some ways we can begin to conceptualize how much money the
-    wealthiest humans actually have?
--   Does anybody really need so much wealth?
--   What is the Industry/Geolocation distribution of billionaires
+![how
+many](./analysis/wealth-quintiles/wealth-quintiles_files/figure-gfm/quintile-pie-1.png)
 
 ## Data
 
-To answer these questions through visualization, we will be relying on
-the following datasets:
+To answer these questions, we relied on the following datasets and
+statistics:
 
 -   Billionaire List [The Forbes Billionaire’s
     List](https://docs.google.com/spreadsheets/d/1JThOdF95e0NYoea5pCWd5UDXLmIGc1Fwj1aajDSYYhk/edit#gid=685599441).

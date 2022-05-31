@@ -85,7 +85,7 @@ industry_choices
 ```
 ```{r industry plot}
 bil_by_industry <- bil %>%
-  group_by(Industry)%>%
+  group_by(Industry) %>%
   summarise(n = n(),
             avg_wealth = mean(Wealth..Millions.))
 bil_by_industry
@@ -94,7 +94,7 @@ num_by_industry_plot <- bil_by_industry %>%
   ggplot(mapping = aes(x = n, y = fct_reorder(Industry, n))) +
   # geom_col(aes(fill = Industry), show.legend = FALSE) +
   scale_fill_brewer(palette="BrBG")+
-  geom_col() +
+  geom_col(fill = "purple", color = "black") +
   labs(title = "Number of Billionaires by Industry",
        x = "Number of Billionaires",
        y = "Industry")
@@ -127,7 +127,7 @@ top_5_plot
 # Choose a billionaire
 name <- "Jeff Bezos"
 wealth <- bil %>%
-  filter(Name.and.Rank == name)%>%
+  filter(Name.and.Rank == name) %>%
   select(Wealth..Millions.) %>%
   as.numeric()
 wealth

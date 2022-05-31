@@ -27,8 +27,8 @@ name_school <- 300 # Name UChicago Booth
 
 # Create a list for all spending items
 spending <- c("Household Spending",
-              "UChicago Master",
-              "International Trip",
+              "UChicago Master's",
+              "Week long trip to Hawaii",
               "Aston Martin",
               "House in Beverly Hills",
               "Name UChicago Booth",
@@ -61,12 +61,12 @@ ui <- navbarPage(
                                                      label = "Household Spending", 
                                                      value = 100)),
                               column(8, numericInput(inputId = "num_uchicago_master", 
-                                                     label = "UChicago Master", 
+                                                     label = "UChicago Master's", 
                                                      value = 50))
                             ),
                             fluidRow(
                               column(8, numericInput(inputId = "num_trip_to_hawaii", 
-                                                     label = "International Trip", 
+                                                     label = "Week long trip to Hawaii", 
                                                      value = 100)),
                               column(8, numericInput(inputId = "num_aston_martin", 
                                                      label = "Aston Martin", 
@@ -98,7 +98,31 @@ ui <- navbarPage(
                           )
                       )
                 ) #sidebarLayout
-           ) #tabPanel
+           ), #tabPanel
+  tabPanel("Wealth Inequality Viz.",
+             mainPanel(
+               tabsetPanel(
+                 id = 'simple-viz',
+                 tabPanel("Cake (Pie) Quintiles",
+                          br(),
+                          plotOutput("radar_plot"),
+                          htmlOutput("info_text")
+                          ),
+                 tabPanel("The Poor vs Billionaires",
+                          br(),
+                          plotOutput("radar_plot"),
+                          ),
+                 tabPanel("Billionaire Locations",
+                          br(),
+                          plotOutput("radar_plot"),
+                          ),
+                 tabPanel("Billionaire Industries",
+                          br(),
+                          plotOutput("radar_plot"),
+                 ),
+               )
+             )
+  ), #tabPanel
     
   )#navbarPage
   
@@ -150,7 +174,7 @@ server <- function(input, output) {
                    "Car" = total_car(),
                    "Housing" = total_house(),
                    "Fame" = total_fame(),
-                   "Left Money" = money_left())})
+                   "Money_Remaining" = money_left())})
   
   # Define the boundary of Radar Plot
   spending_data <- reactive({rbind(rep(max_value(),7) , rep(0,7) , new_row())})
@@ -177,11 +201,15 @@ server <- function(input, output) {
                vlcex=1.5 
     )
   }
+  
+  output$billionaire_industry <- renderImage({
+    filename <- normalizePath(file.path('./images', paste('image', input$n, '.jpeg', sep='')))
+  })
   )
   
   output$info_text <- renderText({
     ifelse(money_left() < 0,
-           "<font color=\"#48A096\"><h2>Success! You went bankruptcy!</h2></font>",
+           "<font color=\"#48A096\"><h2>Success! You went bankrupt!</h2></font>",
            "<font color=\"#48A096\"><h2>You need to spend more!</h2></font>")
     
   })

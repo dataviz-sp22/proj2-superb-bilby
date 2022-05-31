@@ -63,21 +63,9 @@ the true scale of global wealth and income inequality.
 -   `proposal`: This folder contains the rmarkdown and markdown of our
     proposal
 -   `analysis`: This folder contains all the analysis and visualization
-    files of our project
-
-## Motivation and Questions
-
-Global wealth and income inequality is at an all time high, however, the
-magnitude of this inequality is difficult to fathom. Often, the uber
-wealthy of society are worshiped for their resilience and innovation,
-when in reality they should be scorned for their greed and malice. A
-resource that helps people more easily digest the extreme wealth
-disparity may shift people away from the deification of the world’s
-oligarchs, and shift people toward the rally against such rapacious
-behavior. We aim to answer the following questions in an attempt to
-clarify the realities of wealth/income inequality, and deploy our
-answers to a [Shiny](https://shiny.rstudio.com/) application for wider
-accessibility:
+    files of our project. It also contains the code for our
+    application/presentation. The application also serves as the
+    presentation.
 
 ### Wealth Inequality
 
@@ -138,7 +126,8 @@ they have remaining.**
 broadly across the entire population. Still, we find an extreme gap. The
 richest quintile has about 300 times the wealth of the poorest, and
 furthermore, the richest quintile has about 7 times more wealth than the
-other 80% of the population combined.**
+other 80% of the population combined. Also of note, the poorest quintile
+and the 2nd poorest quintile have less than 1% of the total wealth.**
 
 ![how
 many](./analysis/wealth-quintiles/wealth-quintiles_files/figure-gfm/quintile-pie-1.png)
@@ -160,3 +149,16 @@ statistics:
     and destined quintiles and race. It also provides intra-quartile and
     quintile breakdowns, such as information about the wealthiest
     quintile within the poorest quintile.
+
+-   Federal Reserve Dataset (Simplified by Bloomberg):  
+    [The Federal Reserve
+    Dataset](https://www.bloomberg.com/news/articles/2021-12-17/wealth-share-rose-in-pandemic-for-poorest-50-and-top-1-of-u-s)
+    was simplified by Bloomberg. We used this to determine contemporary
+    wealth levels of Americans, specifically the wealth median of
+    America.
+
+-   Mian & Sufi 2014 (Excerpt, Chicago Booth): [The Mian & Sufi
+    Paper](https://www.chicagobooth.edu/review/how-high-debt-leads-to-income-inequality)
+    breaks down several wealth quintile statistics. Specifically, the
+    amount of wealth in each quintile as well as the break downs of the
+    distribution of wealth within each quintile.

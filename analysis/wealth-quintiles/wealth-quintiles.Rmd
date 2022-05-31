@@ -67,9 +67,3 @@ wealth_quintiles %>%
   scale_fill_brewer(palette = "Set2")
 
 ```
-```{r}
-wealth_quintiles %>%
-  pivot_longer(cols = Debt:Financial, names_to = "Measure") %>%
-  ggplot(aes(x = Quintile, y = value, fill = "Measure")) +
-  geom_bar(posititon = "fill", stat = "identity")
-```

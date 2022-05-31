@@ -2,6 +2,8 @@ Facets of Wealth Inequality Visualized
 ================
 Superb Bilby
 
+[Deployed Shiny App Webpage](https://jinfei.shinyapps.io/bil-wealth-app/)
+
 ## Introduction
 
 An important component of Data Visualization is perspective. When there

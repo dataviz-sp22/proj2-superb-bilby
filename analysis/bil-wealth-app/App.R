@@ -47,7 +47,7 @@ ui <- navbarPage(
   title = "Wealth Inequality",
   
   tabPanel("Spend all your money!", 
-           icon=icon("dollar"),
+           # icon=icon("dollar"),
            sidebarLayout(
              sidebarPanel(width=3, #sidebarPanel "New Cases"
                             selectInput(inputId = "name", 
@@ -105,24 +105,23 @@ ui <- navbarPage(
                  id = 'simple-viz',
                  tabPanel("Cake (Pie) Quintiles",
                           br(),
-                          plotOutput("radar_plot"),
-                          htmlOutput("info_text")
+                          plotOutput("pie")
                           ),
                  tabPanel("The Poor vs Billionaires",
                           br(),
-                          plotOutput("radar_plot"),
+                          plotOutput("how_many")
                           ),
                  tabPanel("Billionaire Locations",
-                          br(),
-                          plotOutput("radar_plot"),
-                          ),
+                         br(),
+                        plotOutput("billionaire_map")
+                         ),
                  tabPanel("Billionaire Industries",
                           br(),
-                          plotOutput("radar_plot"),
-                 ),
+                          imageOutput("billionaire_industry")
+                 )
                )
              )
-  ), #tabPanel
+  ) #tabPanel
     
   )#navbarPage
   
@@ -201,12 +200,33 @@ server <- function(input, output) {
                vlcex=1.5 
     )
   }
-  
-  output$billionaire_industry <- renderImage({
-    filename <- normalizePath(file.path('./images', paste('image', input$n, '.jpeg', sep='')))
-  })
   )
   
+  output$billionaire_industry <- renderImage({
+    filename <- normalizePath(file.path('./images/industry plot-1.png'))
+    list(src = filename,
+         alt = paste("Image number", input$n))
+  }, deleteFile = FALSE)
+  
+  output$billionaire_map <- renderImage({
+    filename <- normalizePath(file.path('./images/plot-choropleth-1.png'))
+    list(src = filename,
+         alt = paste("Image number", input$n))
+  }, deleteFile = FALSE)  
+  
+    output$how_many <- renderImage({
+    filename <- normalizePath(file.path('./images/how-many-americans-1.png'))
+    list(src = filename,
+         alt = paste("Image number", input$n))
+  }, deleteFile = FALSE)  
+
+    output$pie <- renderImage({
+      filename <- normalizePath(file.path('./images/quintile-pie-1.png'))
+      list(src = filename,
+           alt = paste("Image number", input$n))
+    }, deleteFile = FALSE)      
+    
+
   output$info_text <- renderText({
     ifelse(money_left() < 0,
            "<font color=\"#48A096\"><h2>Success! You went bankrupt!</h2></font>",

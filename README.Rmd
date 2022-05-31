@@ -89,4 +89,6 @@ To answer these questions, we relied on the following datasets and statistics:
 [The Forbes Billionaire's List](https://docs.google.com/spreadsheets/d/1JThOdF95e0NYoea5pCWd5UDXLmIGc1Fwj1aajDSYYhk/edit#gid=685599441). The dataset provides information about billionaire's networths, how old they are, what industry they are in, their gender, and their location. 
 
 * Wealth Mobility Dataset
-[The Wealth Mobility Dataset](https://github.com/fpfeffer/WealthMobility/blob/master/Data/2-wealth-structure.csv). The dataset breaks down how wealth is divided up by their original and destined quintiles and race. It also provides intra-quartile and quintile breakdowns, such as information about the wealthiest quintile within the poorest quintile.
+[The Wealth Mobility Dataset](https://github.com/fpfeffer/WealthMobility/blob/master/Data/2-wealth-structure.csv). The dataset breaks down how wealth is divided up by their original and destined quintiles and race. It also provides intra-quartile and quintile breakdowns, such as information about the wealthiest quintile within the poorest quintile. 
+
+* 

@@ -117,7 +117,8 @@ the arrows to increment their various purchases. A central plot shows
 the user how they have spent their money thus far and how much money
 they have remaining.**
 
-![billionaire_app](./analysis/bil-wealth-app/example/app_example.png)
+![billionaire_app](./analysis/geo-spatial-analysis_files/figure-gfm/app-example.png)
+
 
 -   If we look at the wealth of the population as opposed to just
     focusing on extremes, i.e. the wealth of billionaires versus

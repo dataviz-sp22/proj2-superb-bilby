@@ -2,7 +2,10 @@ Facets of Wealth Inequality Visualized
 ================
 Superb Bilby
 
-[Deployed Shiny App Webpage](https://jinfei.shinyapps.io/bil-wealth-app/)
+## Shiny App
+
+Please find our deployed shiny app
+[here](https://jinfei.shinyapps.io/bil-wealth-app/). It contains a
 
 ## Introduction
 
@@ -68,6 +71,8 @@ the true scale of global wealth and income inequality.
     files of our project. It also contains the code for our
     application/presentation. The application also serves as the
     presentation.
+-   `bil-wealth-app`: This folder contains codes and files for our shiny
+    app.
 
 ### Wealth Inequality
 
@@ -96,15 +101,15 @@ industry, i.e. Finance & Investments, is the biggest billionaire maker
 of all of the categories.**
 
 ![who are
-billionaires](./analysis/geo-spatial-analysis_files/figure-gfm/industry%20plot-1.png)
+billionaires](./analysis/geo-spatial-analysis/geo-spatial-analysis_files/figure-gfm/industry%20plot-1.png)
 
 ![Industry
-Billionaires](./analysis/geo-spatial-analysis_files/figure-gfm/plot-choropleth-1.png)
+Billionaires](./analysis/geo-spatial-analysis/geo-spatial-analysis_files/figure-gfm/plot-choropleth-1.png)
 
 -   What can the wealth of a billionaire accomplish? Does anybody really
     need so much wealth?
 
-**To answer this question, we decided to build a reactive shiny
+To answer this question, we decided to build a reactive shiny
 application which allows users to input a quantity of highly expensive
 items to try and match the wealth of any of the billionaires on Forbe’s
 list. We include options such as the cost for a week long trip to Hawaii
@@ -115,10 +120,9 @@ wealth of the selected billionaire. One will quickly find that it is
 extremely tedious just to spend the billionaire’s money if the click on
 the arrows to increment their various purchases. A central plot shows
 the user how they have spent their money thus far and how much money
-they have remaining.**
+they have remaining.
 
-![billionaire_app](./analysis/geo-spatial-analysis_files/figure-gfm/app-example.png)
-
+![billionaire_app](./bil-wealth-app/example/app_example.png)
 
 -   If we look at the wealth of the population as opposed to just
     focusing on extremes, i.e. the wealth of billionaires versus

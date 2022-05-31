@@ -230,7 +230,9 @@ server <- function(input, output) {
   output$billionaire_industry <- renderImage({
     filename <- normalizePath(file.path('./images/industry plot-1.png'))
     list(src = filename,
-         alt = paste("Image number", input$n))
+         width = "90%",
+         height = "110%"
+         )
   }, deleteFile = FALSE)
   
   output$billionaire_map <- renderImage({

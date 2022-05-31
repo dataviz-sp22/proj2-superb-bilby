@@ -3,6 +3,9 @@ title: "Facets of Wealth Inequality Visualized"
 author: "Superb Bilby"
 output: github_document
 ---
+## Shiny App
+
+Please find our deployed shiny app [here](https://jinfei.shinyapps.io/bil-wealth-app/). It contains a 
 
 ```{r load-packages, message = FALSE, warning = FALSE, echo = FALSE}
 library(tidyverse)
@@ -26,7 +29,7 @@ example_log <- data.frame(name = c("Jeff Bezos Wealth", "UChicago Endowment", "M
 
 example_log %>%
   ggplot(aes(y = name, x = wealth)) +
-  geom_col(fill = "purple") +
+  geom_col(fill = "#93E9BE") +
   scale_x_log10() +
   labs(y = "",
        x = "Wealth (Logged Axis)",
@@ -47,6 +50,7 @@ Our high level goal is to create an easily digestible application which conveys 
 - `data`: This folder contains data needed for our analysis and visualization
 - `proposal`: This folder contains the rmarkdown and markdown of our proposal
 - `analysis`: This folder contains all the analysis and visualization files of our project. It also contains the code for our application/presentation. The application also serves as the presentation. 
+- `bil-wealth-app`: This folder contains codes and files for our shiny app.
 
 ### Wealth Inequality  
 
@@ -60,16 +64,16 @@ Our high level goal is to create an easily digestible application which conveys 
 
 **As we can see from the plots below, there are a large number of billionaires living in some of the most populous states. It seems that population and number of billionaires may have a somewhat rough but present linear association with population of the state. Additionally, we see that about half all billionaires are in three industries: Finance, technology, and food & beverage. Unsurprisingly, the "money" industry, i.e. Finance & Investments, is the biggest billionaire maker of all of the categories.**
 
-![who are billionaires](./analysis/geo-spatial-analysis_files/figure-gfm/industry plot-1.png)  
+![who are billionaires](./analysis/geo-spatial-analysis/geo-spatial-analysis_files/figure-gfm/industry plot-1.png)  
 
-![Industry Billionaires](./analysis/geo-spatial-analysis_files/figure-gfm/plot-choropleth-1.png)
+![Industry Billionaires](./analysis/geo-spatial-analysis/geo-spatial-analysis_files/figure-gfm/plot-choropleth-1.png)
 
 - What can the wealth of a billionaire accomplish?  Does anybody really need so much wealth? 
 
 
-**To answer this question, we decided to build a reactive shiny application which allows users to input a quantity of highly expensive items to try and match the wealth of any of the billionaires on Forbe's list. We include options such as the cost for a week long trip to Hawaii ($4,000), the cost of a modest house in Hollywood ($3 million), and the cost of building (and naming) the UChicago Booth School of Business ($300 million). The goal is to try to spend enough money to match the wealth of the selected billionaire. One will quickly find that it is extremely tedious just to spend the billionaire's money if the click on the arrows to increment their various purchases. A central plot shows the user how they have spent their money thus far and how much money they have remaining.** 
+To answer this question, we decided to build a reactive shiny application which allows users to input a quantity of highly expensive items to try and match the wealth of any of the billionaires on Forbe's list. We include options such as the cost for a week long trip to Hawaii ($4,000), the cost of a modest house in Hollywood ($3 million), and the cost of building (and naming) the UChicago Booth School of Business ($300 million). The goal is to try to spend enough money to match the wealth of the selected billionaire. One will quickly find that it is extremely tedious just to spend the billionaire's money if the click on the arrows to increment their various purchases. A central plot shows the user how they have spent their money thus far and how much money they have remaining.
 
-![billionaire_app](./analysis/bil-wealth-app/example/app_example.png)
+![billionaire_app](./bil-wealth-app/example/app_example.png)
 
 - If we look at the wealth of the population as opposed to just focusing on extremes, i.e. the wealth of billionaires versus America's poorest, does wealth inequality still look that extreme?
 

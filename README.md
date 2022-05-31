@@ -5,7 +5,7 @@ Superb Bilby
 ## Shiny App
 
 Please find our deployed shiny app
-[here](https://jinfei.shinyapps.io/bil-wealth-app/). It contains a
+[here](https://jinfei.shinyapps.io/bil-wealth-app/). 
 
 ## Introduction
 

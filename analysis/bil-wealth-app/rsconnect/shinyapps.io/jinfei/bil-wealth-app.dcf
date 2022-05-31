@@ -5,7 +5,7 @@ account: jinfei
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6398892
-bundleId: 5960981
+bundleId: 5962405
 url: https://jinfei.shinyapps.io/bil-wealth-app/
-when: 1653937547.64184
-lastSyncTime: 1653937547.64184
+when: 1653974647.62691
+lastSyncTime: 1653974647.62693

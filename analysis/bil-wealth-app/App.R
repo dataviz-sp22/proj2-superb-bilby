@@ -45,11 +45,52 @@ name_choices <- bil %>%
 # Define UI --------------------------------------------------------------------
 ui <- navbarPage(
   title = "Wealth Inequality",
-  
+  theme = bslib::bs_theme(
+    bootswatch = "minty"),
+  tabPanel("Introduction",
+           br(),
+           br(),
+           br(),
+           br(),
+           br(),
+           br(),
+           br(),
+           h1("Facets of Wealth Inequality Visualized", align = "center"),
+           br(),
+           br(),
+           br(),
+           br(),
+           br(),
+           br(),
+           h2("Superb Bilby", align = "center"),
+           h3("Micah Corning-Myers, Jinfei Zhu", align = "center")
+  ),
+  tabPanel("Wealth Inequality Viz.",
+           mainPanel(
+             tabsetPanel(
+               id = 'simple-viz',
+               tabPanel("Cake (Pie) Quintiles",
+                        br(),
+                        plotOutput("pie")
+               ),
+               tabPanel("The Poor vs Billionaires",
+                        br(),
+                        plotOutput("how_many")
+               ),
+               tabPanel("Billionaire Locations",
+                        br(),
+                        plotOutput("billionaire_map")
+               ),
+               tabPanel("Billionaire Industries",
+                        br(),
+                        imageOutput("billionaire_industry")
+               )
+             )
+           )
+  ), #tabPanel
   tabPanel("Spend all your money!", 
-           # icon=icon("dollar"),
            sidebarLayout(
-             sidebarPanel(width=3, #sidebarPanel "New Cases"
+             sidebarPanel(width=3, #sidebarPanel
                             selectInput(inputId = "name", 
                                       label = "Enter Billionaire Name",
                                       choices = name_choices,
@@ -62,12 +103,12 @@ ui <- navbarPage(
                                                      value = 100)),
                               column(8, numericInput(inputId = "num_uchicago_master", 
                                                      label = "UChicago Master's", 
-                                                     value = 50))
+                                                     value = 10))
                             ),
                             fluidRow(
-                              column(8, numericInput(inputId = "num_trip_to_hawaii", 
-                                                     label = "Week long trip to Hawaii", 
-                                                     value = 100)),
+                              column(8, numericInput(inputId = "num_name_school", 
+                                                     label = "Name UChicago Booth", 
+                                                     value = 10)),
                               column(8, numericInput(inputId = "num_aston_martin", 
                                                      label = "Aston Martin", 
                                                      value = 20))
@@ -76,21 +117,27 @@ ui <- navbarPage(
                               column(8, numericInput(inputId = "num_house_in_beverly_hill", 
                                                      label = "House in Beverly Hills", 
                                                      value = 20)),
-                              column(8, numericInput(inputId = "num_name_school", 
-                                                     label = "Name UChicago Booth", 
-                                                     value = 50))
+                              column(8, numericInput(inputId = "num_trip_to_hawaii", 
+                                                     label = "Week long trip to Hawaii", 
+                                                     value = 100))
+
                             ),
                             br()
                           ),
              mainPanel(
                tabsetPanel(
                  id = 'radar-plot',
+                 tabPanel("How to spend?",
+                          br(),
+                          imageOutput("spending_choices_plot",
+                                      width = "400px")),
                  tabPanel("Radar Plot",
                           br(),
                           # tableOutput("test_table")
                           # textOutput("test")
                           plotOutput("radar_plot"),
-                          htmlOutput("info_text")
+                          htmlOutput("info_text"),
+                          width = "120%"
                           ),
                  tabPanel("Spending Data",
                           br(),
@@ -98,31 +145,8 @@ ui <- navbarPage(
                           )
                       )
                 ) #sidebarLayout
-           ), #tabPanel
-  tabPanel("Wealth Inequality Viz.",
-             mainPanel(
-               tabsetPanel(
-                 id = 'simple-viz',
-                 tabPanel("Cake (Pie) Quintiles",
-                          br(),
-                          plotOutput("pie")
-                          ),
-                 tabPanel("The Poor vs Billionaires",
-                          br(),
-                          plotOutput("how_many")
-                          ),
-                 tabPanel("Billionaire Locations",
-                         br(),
-                        plotOutput("billionaire_map")
-                         ),
-                 tabPanel("Billionaire Industries",
-                          br(),
-                          imageOutput("billionaire_industry")
-                 )
-               )
-             )
-  ) #tabPanel
-    
+           ) #tabPanel
+
   )#navbarPage
   
 
@@ -138,7 +162,7 @@ server <- function(input, output) {
     {
       bil %>%
         filter(Name.and.Rank == input$name)%>%
-        pull(Wealth..Millions.) %>%
+        select(Wealth..Millions.) %>%
         as.numeric()          
     }
   )
@@ -191,9 +215,10 @@ server <- function(input, output) {
                cglcol="grey", 
                cglty=1, 
                axislabcol="grey", 
-               caxislabels=seq(0, 
-                               max_value(), 
-                               round(max_value()/5, digits = -4)), 
+               # caxislabels=seq(0, 
+               #                 max_value(), 
+               #                 round(max_value()/5, 
+               #                       digits = -4)), 
                cglwd=0.8,
                
                #custom labels
@@ -226,8 +251,15 @@ server <- function(input, output) {
            alt = paste("Image number", input$n))
     }, deleteFile = FALSE)      
     
+    output$spending_choices_plot <- renderImage({
+      filename <- normalizePath(file.path('./images/spending-choices.png'))
+      list(src = filename,
+           width = "230%",
+           height = "150%")
+    }, deleteFile = FALSE)  
+    
 
-  output$info_text <- renderText({
+   output$info_text <- renderText({
     ifelse(money_left() < 0,
            "<font color=\"#48A096\"><h2>Success! You went bankrupt!</h2></font>",
            "<font color=\"#48A096\"><h2>You need to spend more!</h2></font>")

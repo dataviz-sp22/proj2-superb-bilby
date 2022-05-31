@@ -235,3 +235,4 @@ name_choices <- bil %>%
 Price of Choice:
 - Radar Chart: https://r-graph-gallery.com/142-basic-radar-chart.html
 - Shiny - Nultiple Numerical value: https://community.rstudio.com/t/creating-multiple-numeric-input-according-to-the-variables-of-an-uploaded-dataset/12293
+- Shiny html: https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/

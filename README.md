@@ -71,6 +71,10 @@ the true scale of global wealth and income inequality.
     files of our project. It also contains the code for our
     application/presentation. The application also serves as the
     presentation.
+    -   `wealth-quintiles`: This folder contains analysis about
+        different wealth quintiles.
+    -   `geo-spatial-analysis`: This folder contains geo-spatial
+        analysis and industry analysis of billionaires.
 -   `bil-wealth-app`: This folder contains codes and files for our shiny
     app.
 
